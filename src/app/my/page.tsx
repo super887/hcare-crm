@@ -16,6 +16,16 @@ function lastSevenDays() {
   });
 }
 
+function getExerciseThumbnail(ex: { videoUrl?: string; thumbnailUrl?: string }): string | null {
+  if (ex.thumbnailUrl) return ex.thumbnailUrl;
+  if (!ex.videoUrl) return null;
+  const match = ex.videoUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+  if (match && match[1]) {
+    return `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg`;
+  }
+  return null;
+}
+
 export default function MyPage() {
   const hydrated = useHydrated();
   const clients = useHcareStore((s) => s.clients);
@@ -132,12 +142,34 @@ export default function MyPage() {
                     {myAssigned.map(({ a, ex }) => {
                       const done = myLogs.some((l) => l.assignedExerciseId === a.id && l.checkedDate === today);
                       const open = openId === a.id;
+                      const thumb = getExerciseThumbnail(ex);
                       return (
                         <li key={a.id} className={`overflow-hidden rounded-2xl bg-white shadow-sm ring-2 transition-all ${done ? "ring-teal-400" : "ring-transparent"}`}>
-                          <a href={ex.videoUrl} target="_blank" rel="noreferrer" className="relative flex h-28 items-center justify-center bg-gradient-to-br from-slate-800 to-slate-700 text-white">
-                            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur"><Play size={22} fill="white" /></span>
-                            <span className="absolute bottom-2 right-3 flex items-center gap-1 text-[10px] text-slate-300">영상 보기 <ExternalLink size={10} /></span>
-                            <span className="absolute left-3 top-2 rounded bg-white/15 px-1.5 py-0.5 text-[10px]">{ex.targetArea}</span>
+                          <a
+                            href={ex.videoUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="group relative flex h-36 w-full items-center justify-center overflow-hidden bg-slate-900 text-white"
+                          >
+                            {thumb ? (
+                              <img
+                                src={thumb}
+                                alt={ex.title}
+                                className="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-300 group-hover:scale-105"
+                              />
+                            ) : (
+                              <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-700" />
+                            )}
+                            <div className="absolute inset-0 bg-slate-950/25 transition-colors group-hover:bg-slate-950/15" />
+                            <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-rose-600/95 text-white shadow-lg backdrop-blur transition-transform group-hover:scale-110">
+                              <Play size={20} fill="white" className="ml-0.5" />
+                            </span>
+                            <span className="absolute bottom-2 right-3 flex items-center gap-1 rounded bg-black/60 px-2 py-0.5 text-[10px] text-white backdrop-blur">
+                              영상 재생 <ExternalLink size={10} />
+                            </span>
+                            <span className="absolute left-3 top-2 rounded bg-teal-600/90 px-2 py-0.5 text-[10px] font-bold text-white shadow-xs backdrop-blur">
+                              {ex.targetArea}
+                            </span>
                           </a>
                           <div className="p-3.5">
                             <h3 className="text-sm font-bold text-slate-900">{ex.title}</h3>

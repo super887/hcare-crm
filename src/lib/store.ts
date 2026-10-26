@@ -322,7 +322,7 @@ export const useHcareStore = create<HcareState>()(
       resetDemo: () => set({ ...seedData(), ...seedUi() }),
     }),
     {
-      name: "hcare-demo-store-v1",
+      name: "hcare-demo-store-v2",
       storage: createJSONStorage(() => localStorage),
       version: 1,
       skipHydration: true,
