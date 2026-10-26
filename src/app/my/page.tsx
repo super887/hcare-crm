@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Activity,
   Award,
@@ -66,6 +66,17 @@ export default function MyPage() {
 
   const client = clients.find((c) => c.id === currentId) ?? clients[0];
   const today = todayStr();
+
+  // URL 파라미터로 모바일/PC 뷰 직접 지정 지원 (?view=mobile | ?view=pc)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const sp = new URLSearchParams(window.location.search);
+      const v = sp.get("view");
+      if (v === "mobile" || v === "pc") {
+        setViewMode(v);
+      }
+    }
+  }, [setViewMode]);
 
   const pkg = client
     ? packages.find((p) => p.clientId === client.id && p.status === "active") ??
