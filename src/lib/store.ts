@@ -96,12 +96,15 @@ interface UiState {
   selectedClientId: string | null;
   /** 고객 화면에서 로그인한 것으로 가정하는 고객 */
   currentClientId: string;
+  /** 고객 화면 디바이스 뷰 모드 (PC 와이드 웹 / 스마트폰 모바일 뷰) */
+  clientViewMode: "pc" | "mobile";
 }
 
 interface Actions {
   setRole: (role: UserRole) => void;
   selectClient: (id: string | null) => void;
   setCurrentClient: (id: string) => void;
+  setClientViewMode: (mode: "pc" | "mobile") => void;
 
   // 고객 / 회차
   addClient: (input: NewClientInput) => Client;
@@ -145,6 +148,7 @@ const seedUi = (): UiState => ({
   role: "therapist",
   selectedClientId: seedClients[0]?.id ?? null,
   currentClientId: seedClients[0]?.id ?? "",
+  clientViewMode: "pc",
 });
 
 export const useHcareStore = create<HcareState>()(
@@ -156,6 +160,7 @@ export const useHcareStore = create<HcareState>()(
       setRole: (role) => set({ role }),
       selectClient: (id) => set({ selectedClientId: id }),
       setCurrentClient: (id) => set({ currentClientId: id }),
+      setClientViewMode: (clientViewMode) => set({ clientViewMode }),
 
       addClient: (input) => {
         const now = new Date().toISOString();
@@ -341,6 +346,7 @@ export const useHcareStore = create<HcareState>()(
         role: s.role,
         selectedClientId: s.selectedClientId,
         currentClientId: s.currentClientId,
+        clientViewMode: s.clientViewMode,
       }),
     },
   ),

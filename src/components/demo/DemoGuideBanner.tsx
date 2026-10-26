@@ -48,10 +48,10 @@ export function DemoGuideBanner() {
           <div className="rounded-lg bg-white/90 p-2.5 border border-teal-100 shadow-2xs">
             <div className="flex items-center gap-1.5 text-xs font-bold text-teal-900 mb-1">
               <span className="flex h-4 w-4 items-center justify-center rounded-full bg-teal-600 text-[10px] text-white">1</span>
-              <span>[관리사] 관찰 체크 & 추천</span>
+              <span>[관리사] 관찰 체크 & 3D 근육 맵</span>
             </div>
             <p className="text-[11px] text-slate-600 leading-relaxed">
-              아래 <b>&apos;경추·어깨&apos;</b>에서 <b>&apos;고개 좌우 회전 시 통증&apos;</b>을 체크해 보세요. 우측 바디맵에 <b>타겟 근육</b>이 붉게 점등되며 맞춤 프로그램이 즉시 추천됩니다.
+              아래 <b>&apos;경추·어깨&apos;</b>에서 <b>&apos;고개 좌우 회전 시 통증&apos;</b>을 체크해 보세요. 우측 <b>3D 인체 바디맵(360° 회전·줌인/아웃 지원)</b>에 타겟 근육이 붉게 점등되며 맞춤 프로그램이 추천됩니다.
             </p>
           </div>
 
@@ -70,10 +70,10 @@ export function DemoGuideBanner() {
           <div className="rounded-lg bg-white/90 p-2.5 border border-teal-100 shadow-2xs">
             <div className="flex items-center gap-1.5 text-xs font-bold text-teal-900 mb-1">
               <span className="flex h-4 w-4 items-center justify-center rounded-full bg-teal-600 text-[10px] text-white">3</span>
-              <span>[고객] 스마트폰 운동 체크</span>
+              <span>[고객] PC 웹 & 모바일 운동 체크</span>
             </div>
             <p className="text-[11px] text-slate-600 leading-relaxed">
-              상단 탭에서 <b>[고객 모바일]</b>로 전환하면 방금 관리사가 배정한 홈운동 영상과 <b>[오늘 운동 완료 체크]</b> 버튼이 바로 연동되는 것을 확인하실 수 있습니다.
+              상단 탭에서 <b>[고객 PC 화면]</b> 또는 <b>[고객 모바일]</b>로 전환하면 3D 케어 부위 리포트, 홈운동 영상 재생, <b>[오늘 운동 완료 체크]</b>가 즉시 연동됩니다.
             </p>
             <div className="mt-1.5 pt-1 border-t border-slate-100 flex items-center justify-between">
               <span className="text-[10px] text-slate-400">대표님 직접 관리:</span>
